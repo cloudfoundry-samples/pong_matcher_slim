@@ -21,7 +21,7 @@ $app->put('/match_requests/:uuid', function($uuid) use($app) {
     echo "{}";
 });
 
-$app->get('/match_requests/:uuid', function($uuid) {
+$app->get('/match_requests/:uuid', function($uuid) use($app) {
     $matchRequest = R::findOne('matchrequest', "uuid = ?", [ $uuid ]);
     if ($matchRequest) {
         echo json_encode([
@@ -29,6 +29,8 @@ $app->get('/match_requests/:uuid', function($uuid) {
             'player' => $matchRequest->player,
             'match_id' => $matchRequest->matchId
         ]);
+    } else {
+        $app->pass();
     }
 });
 
