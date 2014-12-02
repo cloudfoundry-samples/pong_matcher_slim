@@ -1,9 +1,18 @@
 <?php
 require '../vendor/autoload.php';
 
+if (array_key_exists('DATABASE_URL', $_ENV)) {
+    $databaseUrl = $_ENV['DATABASE_URL'];
+} else {
+    $databaseUrl = 'mysql2://slimpong:slimpong@127.0.0.1:3306/pong_matcher_slim_development';
+}
+
+$parsedUrl = parse_url($databaseUrl);
+$dbname = ltrim($parsedUrl['path'], '/');
+
 R::setup(
-    'mysql:host=localhost;dbname=pong_matcher_slim_development',
-    'slimpong', 'slimpong'
+    "mysql:host={$parsedUrl['host']};dbname=$dbname",
+    $parsedUrl['user'], $parsedUrl['pass']
 );
 
 $app = new \Slim\Slim();

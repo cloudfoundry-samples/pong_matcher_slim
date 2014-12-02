@@ -1,3 +1,5 @@
 ---
 applications:
 - name: slimpong
+  services:
+  - mysql
