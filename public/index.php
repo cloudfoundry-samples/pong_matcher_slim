@@ -12,6 +12,7 @@ $parser = new DatabaseUrlParser();
 $parsedUrl = $parser->toRedBean($databaseUrl);
 
 R::setup($parsedUrl['connection'], $parsedUrl['user'], $parsedUrl['pass']);
+R::freeze(true);
 
 $app = new \Slim\Slim();
 
