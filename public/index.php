@@ -95,4 +95,8 @@ $app->get('/matches/:uuid', function($uuid) use($app) {
     }
 });
 
+$app->post('/results', function() use($app) {
+    $app->response->setStatus(201);
+});
+
 $app->run();
