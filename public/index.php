@@ -1,5 +1,6 @@
 <?php
-require '../vendor/autoload.php';
+require dirname(__FILE__).'/../vendor/autoload.php';
+require dirname(__FILE__).'/../src/DatabaseUrlParser.php';
 
 if (array_key_exists('DATABASE_URL', $_ENV)) {
     $databaseUrl = $_ENV['DATABASE_URL'];
@@ -7,13 +8,10 @@ if (array_key_exists('DATABASE_URL', $_ENV)) {
     $databaseUrl = 'mysql2://slimpong:slimpong@127.0.0.1:3306/pong_matcher_slim_development';
 }
 
-$parsedUrl = parse_url($databaseUrl);
-$dbname = ltrim($parsedUrl['path'], '/');
+$parser = new DatabaseUrlParser();
+$parsedUrl = $parser->toRedBean($databaseUrl);
 
-R::setup(
-    "mysql:host={$parsedUrl['host']};dbname=$dbname",
-    $parsedUrl['user'], $parsedUrl['pass']
-);
+R::setup($parsedUrl['connection'], $parsedUrl['user'], $parsedUrl['pass']);
 
 $app = new \Slim\Slim();
 
