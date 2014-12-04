@@ -13,4 +13,18 @@ class DatabaseUrlParserTest extends PHPUnit_Framework_TestCase {
             $parser->toRedBean('mysql2://someuser:somepass@127.0.0.1:3306/pong_matcher_slim_development')
         );
     }
+
+    public function testConvertsIntoEnvVarNamesForPhinxConfig() {
+        $parser = new DatabaseUrlParser();
+        $this->assertEquals(
+            [
+                'PHINX_DBHOST=127.0.0.1',
+                'PHINX_DBPORT=3306',
+                'PHINX_DBNAME=pong_matcher_slim_development',
+                'PHINX_DBUSER=someuser',
+                'PHINX_DBPASS=somepass'
+            ],
+            $parser->toPhinxEnvVars('mysql2://someuser:somepass@127.0.0.1:3306/pong_matcher_slim_development')
+        );
+    }
 }

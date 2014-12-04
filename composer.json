@@ -16,7 +16,8 @@
   "require": {
     "ext-mbstring": "*",
     "slim/slim": "2.*",
-    "redbeanphp": "master"
+    "redbeanphp": "master",
+    "robmorgan/phinx": "*"
   },
 
   "require-dev": {

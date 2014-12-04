@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+require dirname(__FILE__).'/../src/DatabaseUrlParser.php';
+
+if (array_key_exists('DATABASE_URL', $_ENV)) {
+    $databaseUrl = $_ENV['DATABASE_URL'];
+} else {
+    $databaseUrl = "mysql2://slimpong:slimpong@127.0.0.1:3306/pong_matcher_slim_development";
+}
+
+$parser = new DatabaseUrlParser();
+$inlineEnv = implode(" ", $parser->toPhinxEnvVars($databaseUrl));
+
+system("$inlineEnv ".dirname(__FILE__).'/../vendor/bin/phinx migrate');
