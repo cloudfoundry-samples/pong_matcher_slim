@@ -29,16 +29,16 @@ $app->put('/match_requests/:uuid', function($uuid) use($app) {
     $opponentRequest = R::findOne(
         'matchrequest',
         'player <> :player
-         AND uuid NOT IN (
-			SELECT match_request_uuid
-			FROM participant
-         )
-         AND player NOT IN (
-			SELECT opponent_id
-			FROM participant
-			WHERE player_id = :player
-         )', [ ':player' => $attributes->player ]
-     );
+        AND uuid NOT IN (
+            SELECT match_request_uuid
+            FROM participant
+        )
+        AND player NOT IN (
+            SELECT opponent_id
+            FROM participant
+            WHERE player_id = :player
+        )', [ ':player' => $attributes->player ]
+    );
 
     $matchId = str_replace('.', '-', uniqid('', true));
 
