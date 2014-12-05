@@ -14,10 +14,5 @@ environments:
         charset: utf8
 
     testing:
-        adapter: mysql
-        host: localhost
-        name: pong_matcher_slim_test
-        user: slimpong
-        pass: slimpong
-        port: 3306
-        charset: utf8
+        adapter: sqlite
+        name: test/test

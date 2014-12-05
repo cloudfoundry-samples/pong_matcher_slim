@@ -1,6 +1,7 @@
 <?php
 require dirname(__FILE__).'/../vendor/autoload.php';
 require dirname(__FILE__).'/../src/DatabaseUrlParser.php';
+require dirname(__FILE__).'/../src/MatchRequestRepository.php';
 
 if (array_key_exists('DATABASE_URL', $_ENV)) {
     $databaseUrl = $_ENV['DATABASE_URL'];
@@ -15,67 +16,30 @@ R::setup($parsedUrl['connection'], $parsedUrl['user'], $parsedUrl['pass']);
 R::freeze(true);
 
 $app = new \Slim\Slim();
+$matchRequestRepository = new MatchRequestRepository();
 
-$app->delete('/all', function() {
-    R::wipe('matchrequest');
-    R::wipe('participant');
+$app->delete('/all', function() use($matchRequestRepository) {
+    $matchRequestRepository->nuke();
 });
 
-$app->put('/match_requests/:uuid', function($uuid) use($app) {
-    $matchRequest = R::dispense('matchrequest');
+$app->put('/match_requests/:uuid', function($uuid) use($app, $matchRequestRepository) {
     $attributes = json_decode($app->request->getBody());
-    $matchRequest->uuid = $uuid;
-    $matchRequest->player = $attributes->player;
 
-    $opponentRequest = R::findOne(
-        'matchrequest',
-        'player <> :player
-        AND uuid NOT IN (
-            SELECT match_request_uuid
-            FROM participant
-        )
-        AND player NOT IN (
-            SELECT opponent_id
-            FROM participant
-            WHERE player_id = :player
-        )', [ ':player' => $attributes->player ]
-    );
-
-    $matchId = str_replace('.', '-', uniqid('', true));
-
-    if ($opponentRequest) {
-        $participant1 = R::dispense('participant');
-        $participant1->matchId = $matchId;
-        $participant1->matchRequestUuid = $opponentRequest->uuid;
-        $participant1->playerId = $opponentRequest->player;
-        $participant1->opponentId = $matchRequest->player;
-
-        $participant2 = R::dispense('participant');
-        $participant2->matchId = $matchId;
-        $participant2->matchRequestUuid = $matchRequest->uuid;
-        $participant2->playerId = $matchRequest->player;
-        $participant2->opponentId = $opponentRequest->player;
-
-        R::store($participant1);
-        R::store($participant2);
-    }
-
-    R::store($matchRequest);
+    $matchRequestRepository->persist([
+        'uuid' => $uuid,
+        'player' => $attributes->player
+    ]);
 
     echo "{}";
 });
 
-$app->get('/match_requests/:uuid', function($uuid) use($app) {
-    $matchRequest = R::findOne('matchrequest', "uuid = ?", [ $uuid ]);
+$app->get('/match_requests/:uuid', function($uuid) use($app, $matchRequestRepository) {
+    $matchRequest = $matchRequestRepository->get($uuid);
     if ($matchRequest) {
-        $matchId = R::getCell("SELECT match_id
-                               FROM participant
-                               WHERE match_request_uuid = :match_request_uuid
-                               LIMIT 1", [ ':match_request_uuid' => $uuid ]);
         echo json_encode([
-            'id' => $matchRequest->uuid,
-            'player' => $matchRequest->player,
-            'match_id' => $matchId
+            'id' => $matchRequest['uuid'],
+            'player' => $matchRequest['player'],
+            'match_id' => $matchRequest['matchId']
         ]);
     } else {
         $app->pass();
