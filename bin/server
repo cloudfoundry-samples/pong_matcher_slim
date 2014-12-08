@@ -1,0 +1,7 @@
+#!/bin/bash
+
+php -d always_populate_raw_post_data=-1 \
+    -d include_path=public \
+    -S 0.0.0.0:3000 \
+    -t public \
+    index.php
