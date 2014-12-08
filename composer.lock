@@ -1,7 +1,8 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
     "hash": "b1721f4c6b710312f33898c59013fafe",
     "packages": [
@@ -126,12 +127,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "50908eb16cd0069d5b95ae8ce0d38b9a20c21515"
+                "reference": "49540771c52fb9c8650a2a07120a12d6dccf1bfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/50908eb16cd0069d5b95ae8ce0d38b9a20c21515",
-                "reference": "50908eb16cd0069d5b95ae8ce0d38b9a20c21515",
+                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/49540771c52fb9c8650a2a07120a12d6dccf1bfe",
+                "reference": "49540771c52fb9c8650a2a07120a12d6dccf1bfe",
                 "shasum": ""
             },
             "require": {
@@ -167,7 +168,7 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-02 20:15:53"
+            "time": "2014-12-08 08:43:12"
         },
         {
             "name": "symfony/config",
@@ -224,12 +225,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "806e29280b4b9700693b32d055ce1b1a491dec39"
+                "reference": "78e19162652f9fcc2a8f5557bfb21372286d9edd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/806e29280b4b9700693b32d055ce1b1a491dec39",
-                "reference": "806e29280b4b9700693b32d055ce1b1a491dec39",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/78e19162652f9fcc2a8f5557bfb21372286d9edd",
+                "reference": "78e19162652f9fcc2a8f5557bfb21372286d9edd",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +271,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-02 20:15:53"
+            "time": "2014-12-08 08:28:21"
         },
         {
             "name": "symfony/filesystem",
@@ -279,12 +280,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "c947f35fe28acea88ae6580d793ccfbc7b363f69"
+                "reference": "c515060ae3829eee36cc22bc416fa60cc5656d8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/c947f35fe28acea88ae6580d793ccfbc7b363f69",
-                "reference": "c947f35fe28acea88ae6580d793ccfbc7b363f69",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/c515060ae3829eee36cc22bc416fa60cc5656d8a",
+                "reference": "c515060ae3829eee36cc22bc416fa60cc5656d8a",
                 "shasum": ""
             },
             "require": {
@@ -317,7 +318,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-12-02 20:19:50"
+            "time": "2014-12-08 08:43:57"
         },
         {
             "name": "symfony/yaml",
@@ -804,12 +805,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "c484a80f97573ab934e37826dba0135a3301b26a"
+                "reference": "4c7f82f0599413ed5521e464071ee8460c96ce89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/c484a80f97573ab934e37826dba0135a3301b26a",
-                "reference": "c484a80f97573ab934e37826dba0135a3301b26a",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/4c7f82f0599413ed5521e464071ee8460c96ce89",
+                "reference": "4c7f82f0599413ed5521e464071ee8460c96ce89",
                 "shasum": ""
             },
             "require": {
@@ -860,7 +861,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2014-11-16 21:32:38"
+            "time": "2014-12-04 15:00:21"
         },
         {
             "name": "sebastian/diff",
@@ -1068,6 +1069,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": [],
+    "prefer-stable": false,
     "platform": {
         "ext-mbstring": "*"
     },
