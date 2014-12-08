@@ -2,6 +2,7 @@
 require dirname(__FILE__).'/../vendor/autoload.php';
 require dirname(__FILE__).'/../src/DatabaseUrlParser.php';
 require dirname(__FILE__).'/../src/MatchRequestRepository.php';
+require dirname(__FILE__).'/../src/MatchRepository.php';
 
 if (array_key_exists('DATABASE_URL', $_ENV)) {
     $databaseUrl = $_ENV['DATABASE_URL'];
@@ -17,6 +18,7 @@ R::freeze(true);
 
 $app = new \Slim\Slim();
 $matchRequestRepository = new MatchRequestRepository();
+$matchRepository = new MatchRepository();
 
 $app->delete('/all', function() use($matchRequestRepository) {
     $matchRequestRepository->nuke();
@@ -46,16 +48,16 @@ $app->get('/match_requests/:uuid', function($uuid) use($app, $matchRequestReposi
     }
 });
 
-$app->get('/matches/:uuid', function($uuid) use($app) {
-    $participants = R::find('participant', 'match_id = ?', [ $uuid ]);
-    if (empty($participants)) {
-        $app->pass();
-    } else {
+$app->get('/matches/:uuid', function($uuid) use($app, $matchRepository) {
+    $match = $matchRepository->get($uuid);
+    if ($match) {
         echo json_encode([
-            'id' => array_values($participants)[0]->matchId,
-            'match_request_1_id' => array_values($participants)[0]->matchRequestUuid,
-            'match_request_2_id' => array_values($participants)[1]->matchRequestUuid
+            'id' => $match['uuid'],
+            'match_request_1_id' => $match['matchRequest1Uuid'],
+            'match_request_2_id' => $match['matchRequest2Uuid']
         ]);
+    } else {
+        $app->pass();
     }
 });
 
