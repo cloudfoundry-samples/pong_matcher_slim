@@ -76,8 +76,7 @@ bin/migrate
 Start the application server:
 
 ```bash
-cd public
-php -S 0.0.0.0:3000 -t . index.php
+bin/server
 ```
 
 Export the test host
