@@ -7,9 +7,9 @@ class MatchRepository {
         if (sizeof($participants) > 0) {
             return [
                 'uuid' => array_values($participants)[0]->matchId,
-                    'matchRequest1Uuid' => array_values($participants)[0]->matchRequestUuid,
-                    'matchRequest2Uuid' => array_values($participants)[1]->matchRequestUuid
-                ];
+                'matchRequest1Uuid' => array_values($participants)[0]->matchRequestUuid,
+                'matchRequest2Uuid' => array_values($participants)[1]->matchRequestUuid
+            ];
         }
     }
 }
