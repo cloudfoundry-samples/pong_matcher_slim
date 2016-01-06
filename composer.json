@@ -6,7 +6,7 @@
         "name": "redbeanphp",
         "version": "master",
         "dist": {
-          "url": "http://www.redbeanphp.com/downloadredbean.php",
+          "url": "http://www.redbeanphp.com/RedBeanPHP4_3.tar.gz",
           "type": "tar"
         }
       }
