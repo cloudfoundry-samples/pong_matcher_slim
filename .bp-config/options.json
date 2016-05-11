@@ -1,0 +1,7 @@
+{
+  "WEB_SERVER": "nginx",
+  "WEBDIR": "public",
+  "LIBDIR": ".",
+  "ADDITIONAL_PREPROCESS_CMDS": "bin/migrate",
+  "PHP_EXTENSIONS": ["bz2", "zlib", "curl", "mcrypt", "pdo", "pdo_mysql"]
+}

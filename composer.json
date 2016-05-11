@@ -6,7 +6,7 @@
         "name": "redbeanphp",
         "version": "master",
         "dist": {
-          "url": "http://www.redbeanphp.com/RedBeanPHP4_3.tar.gz",
+          "url": "http://www.redbeanphp.com/downloads/RedBeanPHP4_3_2.tar.gz",
           "type": "tar"
         }
       }
@@ -29,5 +29,8 @@
       "vendor/redbeanphp/rb.php"
     ]
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "config": {
+    "secure-http": false
+  }
 }
