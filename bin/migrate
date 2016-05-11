@@ -11,4 +11,4 @@ if (array_key_exists('DATABASE_URL', $_ENV)) {
 $parser = new DatabaseUrlParser();
 $inlineEnv = implode(" ", $parser->toPhinxEnvVars($databaseUrl));
 
-system("$inlineEnv ".dirname(__FILE__).'/../vendor/bin/phinx migrate');
+system("$inlineEnv ".dirname(__FILE__).'/../php/bin/phinx migrate');
